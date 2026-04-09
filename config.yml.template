@@ -1,0 +1,26 @@
+bot_token: "TELEGRAM_BOT_TOKEN"
+
+# Telegram user IDs, которым разрешено использовать бота
+allowed_user_ids:
+  - 123456789
+
+anthropic:
+  api_key: "sk-ant-..."
+  model: "claude-sonnet-4-20250514"
+
+avito:
+  # Для Messenger API (OAuth2) — зарегистрировать приложение на developers.avito.ru
+  client_id: ""
+  client_secret: ""
+
+  # Адрес по умолчанию для объявлений
+  default_address: "Москва"
+
+  # Интервал опроса Messenger API (секунды)
+  messenger_poll_interval_sec: 30
+
+browser:
+  headless: true
+  data_dir: "./browser_data"
+  locale: "ru-RU"
+  timezone: "Europe/Moscow"
