@@ -1,0 +1,33 @@
+name: Deploy to VPS
+
+on:
+  push:
+    branches:
+      - master
+
+jobs:
+  deploy:
+    runs-on: self-hosted
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Deploy to VPS
+        uses: appleboy/ssh-action@master
+        with:
+          host: ${{ secrets.VPS_HOST }}
+          username: ${{ secrets.VPS_USERNAME }}
+          key: ${{ secrets.VPS_SSH_KEY }}
+          script: |
+            #!/bin/bash
+            set -e
+
+            if [ ! -d "${{ secrets.PROJECT_PATH }}" ]; then
+              git clone git@github.com:${{ github.repository }}.git "${{ secrets.PROJECT_PATH }}"
+            fi
+
+            cd "${{ secrets.PROJECT_PATH }}"
+            git pull origin master
+            docker compose down
+            docker compose build --no-cache
+            docker compose up -d

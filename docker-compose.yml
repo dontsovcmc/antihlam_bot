@@ -1,0 +1,15 @@
+services:
+  avito_bot:
+    build: .
+    environment:
+      - DATA_PATH=/app
+    volumes:
+      - .:/app
+      - ./browser_data:/app/browser_data
+    restart: unless-stopped
+    shm_size: '512mb'
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "10m"
+        max-file: "3"
