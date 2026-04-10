@@ -135,7 +135,7 @@ CONFIRMING: итоговый вид объявления
 - NEVER read or commit `.env` / `config.yml` files
 - NEVER put tokens/secrets in code or commands — все секреты только в `config.yml`
 - Always run `pytest` before commits
-- Never commit to master — работа только в feature-ветках
+- **CRITICAL: НИКОГДА не коммитить и не пушить напрямую в master.** Все изменения — только через feature-ветку и PR. Без исключений, включая фиксы CI/CD и deploy.
 - NEVER use `git stash` — вместо этого temporary commit
 - ALWAYS rebase before push: `git checkout master && git remote update && git pull && git checkout - && git rebase master`
 - CSS-селекторы в `publisher.py` могут устареть при обновлении Avito — проверять при ошибках публикации
