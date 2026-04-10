@@ -13,12 +13,14 @@ jobs:
         run: |
           set -e
 
-          if [ ! -d "${{ secrets.PROJECT_PATH }}" ]; then
+          if [ ! -d "${{ secrets.PROJECT_PATH }}/.git" ]; then
+            rm -rf "${{ secrets.PROJECT_PATH }}"
             git clone git@github.com:${{ github.repository }}.git "${{ secrets.PROJECT_PATH }}"
           fi
 
           cd "${{ secrets.PROJECT_PATH }}"
-          git pull origin master
+          git fetch origin master
+          git reset --hard origin/master
           docker compose down
           docker compose build --no-cache
           docker compose up -d
